@@ -1,28 +1,23 @@
 /* eslint-disable max-len */
-import BaseFoundation, { DefaultAdapter } from '../base/foundation';
-import { strings } from './constants';
 import {
-    format,
-    set,
-    addMonths,
-    subMonths,
-    subYears,
-    addYears,
+    addMonths, addYears,
     differenceInCalendarMonths,
-    differenceInCalendarYears,
-    isSameDay,
-    parseISO
+    differenceInCalendarYears, format, isSameDay,
+    parseISO, set, subMonths,
+    subYears
 } from 'date-fns';
-import { isBefore, isValidDate, getDefaultFormatToken, getFullDateOffset } from './_utils/index';
-import { formatFullDate, WeekStartNumber } from './_utils/getMonthTable';
-import { compatibleParse } from './_utils/parser';
-import { includes, isSet, isEqual, isFunction } from 'lodash';
+import { includes, isEqual, isSet } from 'lodash';
+import BaseFoundation, { DefaultAdapter } from '../base/foundation';
 import { zonedTimeToUtc } from '../utils/date-fns-extra';
-import { getDefaultFormatTokenByType } from './_utils/getDefaultFormatToken';
 import isNullOrUndefined from '../utils/isNullOrUndefined';
-import { BaseValueType, PresetPosition, ValueType } from './foundation';
-import { MonthDayInfo } from './monthFoundation';
 import { ArrayElement } from '../utils/type';
+import { strings } from './constants';
+import { PresetPosition, ValueType } from './foundation';
+import { MonthDayInfo } from './monthFoundation';
+import { getDefaultFormatTokenByType } from './_utils/getDefaultFormatToken';
+import { formatFullDate, WeekStartNumber } from './_utils/getMonthTable';
+import { getDefaultFormatToken, getFullDateOffset, isBefore, isValidDate } from './_utils/index';
+import { compatibleParse } from './_utils/parser';
 
 const dateDiffFns = {
     month: differenceInCalendarMonths,
@@ -241,7 +236,7 @@ export default class MonthsGridFoundation extends BaseFoundation<MonthsGridAdapt
             });
         }
         if (refreshPicker) {
-            this.handleShowDateAndTime(strings.PANEL_TYPE_LEFT, values[0] || newMonthLeft.pickerDate);
+            this.handleShowDateAndTime(strings.PANEL_TYPE_LEFT, values[values.length - 1] || newMonthLeft.pickerDate);
         } else {
             // FIXME:
             this.handleShowDateAndTime(strings.PANEL_TYPE_LEFT, newMonthLeft.pickerDate);
